@@ -1,6 +1,5 @@
 const factory = (() => {
   const charInfo = (char, occurence) => ({ char, occurence });
-
   return {
     charInfo,
   };
@@ -13,13 +12,10 @@ const strAnalyser = (() => {
     const tally = [];
     for (let i = 0; i < charArray.length; i += 1) {
       const element = charArray[i];
-
-      // if the tally array is empty.
       if (tally.length === 0) {
         const firstChar = factory.charInfo(element, 1);
         tally.push(firstChar);
       } else {
-        // console.log(tally);
         const indexResult = tally.findIndex((char) => char.char === element);
         if (indexResult !== -1) {
           tally[indexResult].occurence += 1;
@@ -29,8 +25,16 @@ const strAnalyser = (() => {
         }
       }
     }
-    
-    return console.log(tally);
+    let highestOccurence = 0;
+    let charHighestOccurence;
+    for (let i = 0; i < tally.length; i += 1) {
+      const element = tally[i];
+      if (element.occurence > highestOccurence) {
+        highestOccurence = element.occurence;
+        charHighestOccurence = element.char;
+      }
+    }
+    return charHighestOccurence;
   };
 
   return {
